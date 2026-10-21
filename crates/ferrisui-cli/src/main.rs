@@ -4,10 +4,9 @@ mod commands;
 mod config;
 mod templates;
 
-
 #[derive(Parser, Debug)]
 #[command(
-    name= "ferrisui",
+    name = "ferrisui",
     bin_name = "ferrisui",
     author = "FerrisUI Team",
     version,
@@ -19,15 +18,13 @@ struct Cli {
     command: Commands,
 }
 
-#[]
+#[derive(Debug, Subcommand)]
 pub enum Commands {
     New {},
     Doctor,
     Dev {},
-    Build {}
+    Build {},
 }
-
-
 
 fn main() {
     println!("Hello, world!");
