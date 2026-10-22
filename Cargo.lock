@@ -368,6 +368,9 @@ dependencies = [
 [[package]]
 name = "ferrisui-core"
 version = "0.1.0"
+dependencies = [
+ "parking_lot",
+]
 
 [[package]]
 name = "filetime"
