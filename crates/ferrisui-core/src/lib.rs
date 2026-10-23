@@ -5,3 +5,4 @@ pub mod event;
 pub mod geometry;
 pub mod id;
 pub mod state;
+pub mod view_node;
