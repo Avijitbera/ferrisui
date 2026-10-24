@@ -375,6 +375,9 @@ dependencies = [
 [[package]]
 name = "ferrisui-layout"
 version = "0.1.0"
+dependencies = [
+ "ferrisui-core",
+]
 
 [[package]]
 name = "filetime"
