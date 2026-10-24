@@ -1,5 +1,5 @@
 use crate::color::Color;
-use crate::geometry::{EdgeInsets, Point, Rect, Size};
+use crate::geometry::{EdgeInsets, Rect};
 use crate::id::ViewId;
 
 #[derive(Debug, Clone)]

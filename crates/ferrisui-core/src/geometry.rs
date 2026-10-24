@@ -19,6 +19,13 @@ impl Point {
     }
 }
 
+impl Add for Point {
+    type Output = Self;
+    fn add(self, rhs: Self) -> Self::Output {
+        Self::new(self.x + rhs.x, self.y + rhs.y)
+    }
+}
+
 impl Sub for Point {
     type Output = Self;
     fn sub(self, rhs: Self) -> Self::Output {
