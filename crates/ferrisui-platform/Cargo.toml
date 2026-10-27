@@ -1,0 +1,18 @@
+[package]
+name = "ferrisui-platform"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ferrisui-core = {path = "../ferrisui-core"}
+winit = "0.29"
+raw-window-handle = "0.6"
+
+arboard = {version = "3.4", optional = true}
+rfd = {version = "0.14", optional = true}
+
+
+[features]
+default = ["clipboard", "file-dialog"]
+clipboard = ["dep:arboard"]
+file-dialog = ["dep:rfd"]

@@ -5,4 +5,5 @@ members = [
     "crates/ferrisui-cli",
     "crates/ferrisui",
     "crates/ferrisui-core"
-, "crates/ferrisui-layout"]
+, "crates/ferrisui-layout", 
+"crates/ferrisui-platform"]
