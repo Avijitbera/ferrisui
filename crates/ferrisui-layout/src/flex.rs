@@ -1,6 +1,6 @@
 use crate::constraints::BoxConstraints;
 use crate::layout_node::LayoutResult;
-use ferrisui_core::geometry::{Point, Rect, Size};
+use ferrisui_core::geometry::{Rect, Size};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum FlexDirection {
