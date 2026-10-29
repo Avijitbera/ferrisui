@@ -4,3 +4,11 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+ferrisui-core = { path = "../ferrisui-core" }
+ferrisui-platform = { path = "../ferrisui-platform" }
+# Modern cross-platform GPU APIs (Metal, Vulkan, DX12)
+wgpu = { version = "22.0", features = ["wgsl"] }
+bytemuck = { version = "1.16", features = ["derive"] }
+raw-window-handle = "0.6"
+pollster = "0.3"
+log = "0.4"
