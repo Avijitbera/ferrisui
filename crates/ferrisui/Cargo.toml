@@ -4,3 +4,9 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+ferrisui-core = { path = "../ferrisui-core" }
+ferrisui-layout = { path = "../ferrisui-layout" }
+ferrisui-platform = { path = "../ferrisui-platform" }
+ferrisui-render = { path = "../ferrisui-render" }
+pollster = "0.3"
+log = "0.4"

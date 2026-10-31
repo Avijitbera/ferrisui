@@ -950,6 +950,14 @@ dependencies = [
 [[package]]
 name = "ferrisui"
 version = "0.1.0"
+dependencies = [
+ "ferrisui-core",
+ "ferrisui-layout",
+ "ferrisui-platform",
+ "ferrisui-render",
+ "log",
+ "pollster",
+]
 
 [[package]]
 name = "ferrisui-cli"
