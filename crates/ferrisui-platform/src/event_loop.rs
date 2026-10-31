@@ -47,9 +47,15 @@ impl PlatformApp {
                     WinitWindowEvent::CloseRequested => {
                         should_exit = true;
                     }
-                    WinitWindowEvent::Resized(_) => {
-                        let scale = window.scale_factor();
-                        handler(&window, Event::ScaleFactorChanged(scale), &mut should_exit);
+                    WinitWindowEvent::Resized(physical_size) => {
+                        handler(
+                            &window,
+                            Event::Resized {
+                                width: physical_size.width,
+                                height: physical_size.height,
+                            },
+                            &mut should_exit,
+                        );
                         window.request_redraw();
                     }
                     WinitWindowEvent::ScaleFactorChanged { scale_factor, .. } => {
@@ -143,7 +149,9 @@ impl PlatformApp {
                     WinitWindowEvent::Focused(focused) => {
                         handler(&window, Event::WindowFocused(focused), &mut should_exit);
                     }
-                    WinitWindowEvent::RedrawRequested => {}
+                    WinitWindowEvent::RedrawRequested => {
+                        handler(&window, Event::RedrawRequested, &mut should_exit);
+                    }
                     _ => {}
                 },
                 _ => {}
