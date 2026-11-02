@@ -21,6 +21,34 @@ pub struct ButtonStyle {
     pub padding: EdgeInsets,
 }
 
+impl ButtonStyle {
+    pub fn filled() -> Self {
+        Self::default()
+    }
+
+    pub fn outlined() -> Self {
+        Self {
+            variant: ButtonVariant::Outlined,
+            background: Color::rgba(1.0, 1.0, 1.0, 0.05),
+            text_color: Color::WHITE,
+            border_color: Color::rgba(1.0, 1.0, 1.0, 0.3),
+            corner_radius: 10.0,
+            padding: EdgeInsets::symmetric(18.0, 10.0),
+        }
+    }
+
+    pub fn text() -> Self {
+        Self {
+            variant: ButtonVariant::Text,
+            background: Color::TRANSPARENT,
+            text_color: Color::hex(0x94A3B8),
+            border_color: Color::TRANSPARENT,
+            corner_radius: 8.0,
+            padding: EdgeInsets::symmetric(16.0, 8.0),
+        }
+    }
+}
+
 impl Default for ButtonStyle {
     fn default() -> Self {
         Self {
@@ -79,11 +107,13 @@ impl View for Button {
             font_size: 15.0,
             color: self.style.text_color,
         });
-        ViewNode::new(NodeKind::Container {
+        let mut node = ViewNode::new(NodeKind::Container {
             background: self.style.background,
             corner_radius: self.style.corner_radius,
             padding: self.style.padding,
         })
-        .with_child(text_child)
+        .with_child(text_child);
+        node.on_click = self.on_click.clone();
+        node
     }
 }

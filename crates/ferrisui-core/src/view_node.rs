@@ -1,3 +1,4 @@
+use crate::callback::Callback;
 use crate::color::Color;
 use crate::geometry::{EdgeInsets, Rect};
 use crate::id::ViewId;
@@ -27,6 +28,7 @@ pub struct ViewNode {
     pub kind: NodeKind,
     pub bounds: Rect,
     pub children: Vec<ViewNode>,
+    pub on_click: Option<Callback<()>>,
 }
 
 impl ViewNode {
@@ -36,6 +38,7 @@ impl ViewNode {
             kind,
             bounds: Rect::ZERO,
             children: Vec::new(),
+            on_click: None,
         }
     }
 
@@ -43,4 +46,10 @@ impl ViewNode {
         self.children.push(child);
         self
     }
+
+    pub fn with_on_click(mut self, on_click: Option<Callback<()>>) -> Self {
+        self.on_click = on_click;
+        self
+    }
 }
+

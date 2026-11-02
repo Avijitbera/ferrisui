@@ -24,6 +24,11 @@ impl VStack {
         self.children.push(AnyView::new(child));
         self
     }
+
+    pub fn children(mut self, children: impl IntoIterator<Item = AnyView>) -> Self {
+        self.children.extend(children);
+        self
+    }
 }
 
 impl View for VStack {
@@ -59,6 +64,11 @@ impl HStack {
 
     pub fn child<V: View + 'static>(mut self, child: V) -> Self {
         self.children.push(AnyView::new(child));
+        self
+    }
+
+    pub fn children(mut self, children: impl IntoIterator<Item = AnyView>) -> Self {
+        self.children.extend(children);
         self
     }
 }

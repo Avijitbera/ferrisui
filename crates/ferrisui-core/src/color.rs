@@ -14,6 +14,11 @@ impl Default for Color {
 
 impl Color {
     pub const TRANSPARENT: Self = Self::rgba(0.0, 0.0, 0.0, 0.0);
+    pub const WHITE: Self = Self::rgb(1.0, 1.0, 1.0);
+    pub const BLACK: Self = Self::rgb(0.0, 0.0, 0.0);
+    pub const RED: Self = Self::rgb(1.0, 0.0, 0.0);
+    pub const GREEN: Self = Self::rgb(0.0, 1.0, 0.0);
+    pub const BLUE: Self = Self::rgb(0.0, 0.0, 1.0);
 
     pub const fn rgba(r: f32, g: f32, b: f32, a: f32) -> Self {
         Self { r, g, b, a }

@@ -150,6 +150,14 @@ impl EdgeInsets {
             left,
         }
     }
+
+    pub const fn horizontal(&self) -> f32 {
+        self.left + self.right
+    }
+
+    pub const fn vertical(&self) -> f32 {
+        self.top + self.bottom
+    }
 }
 
 pub struct Corners<T = f32> {

@@ -35,8 +35,8 @@ impl Slider {
 }
 
 impl View for Slider {
-    fn build(&self, ctx: &mut BuildContext) -> ViewNode {
-        let fill_pct = (self.value - self.min) / (self.max - self.min).max(0.001);
+    fn build(&self, _ctx: &mut BuildContext) -> ViewNode {
+        let _fill_pct = (self.value - self.min) / (self.max - self.min).max(0.001);
 
         ViewNode::new(NodeKind::Container {
             background: Color::rgba(1.0, 1.0, 1.0, 0.15),

@@ -29,7 +29,7 @@ impl Text {
 }
 
 impl View for Text {
-    fn build(&self, ctx: &mut BuildContext) -> ViewNode {
+    fn build(&self, _ctx: &mut BuildContext) -> ViewNode {
         ViewNode::new(NodeKind::Text {
             text: self.content.clone(),
             font_size: self.font_size,

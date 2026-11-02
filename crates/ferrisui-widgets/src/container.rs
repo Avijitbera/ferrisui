@@ -10,8 +10,8 @@ pub struct Container<V: View> {
     padding: EdgeInsets,
 }
 
-impl<V: View> Container<V> {
-    pub fn new() -> Container<()> {
+impl Container<()> {
+    pub fn new() -> Self {
         Container {
             child: None,
             background: Color::TRANSPARENT,
@@ -19,7 +19,9 @@ impl<V: View> Container<V> {
             padding: EdgeInsets::ZERO,
         }
     }
+}
 
+impl<V: View> Container<V> {
     pub fn child<C: View>(self, child: C) -> Container<C> {
         Container {
             child: Some(child),
@@ -31,6 +33,11 @@ impl<V: View> Container<V> {
 
     pub fn background(mut self, color: Color) -> Self {
         self.background = color;
+        self
+    }
+
+    pub fn corner_radius(mut self, radius: f32) -> Self {
+        self.corner_radius = radius;
         self
     }
 
