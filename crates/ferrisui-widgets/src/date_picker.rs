@@ -122,7 +122,7 @@ impl DatePicker {
 }
 
 impl View for DatePicker {
-    fn build(&self, ctx: &mut BuildContext) -> ViewNode {
+    fn build(&self, _ctx: &mut BuildContext) -> ViewNode {
         let cur_year = self.viewed_year.get();
         let cur_month = self.viewed_month.get();
         let selected = self.selected_date.get();
