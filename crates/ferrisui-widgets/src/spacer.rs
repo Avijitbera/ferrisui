@@ -9,6 +9,7 @@ use ferrisui_core::{
 #[derive(Debug, Clone, Copy)]
 pub struct Spacer {
     fixed_size: Option<f32>,
+    #[allow(dead_code)]
     flex: f32,
 }
 
@@ -42,7 +43,7 @@ impl Default for Spacer {
 }
 
 impl View for Spacer {
-    fn build(&self, ctx: &mut BuildContext) -> ViewNode {
+    fn build(&self, _ctx: &mut BuildContext) -> ViewNode {
         let pad = match self.fixed_size {
             Some(sz) => EdgeInsets::all(sz / 2.0),
             None => EdgeInsets::ZERO,

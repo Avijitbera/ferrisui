@@ -1,0 +1,7 @@
+[package]
+name = "ferrisui-theme"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ferrisui-core = {path = "../ferrisui-core"}

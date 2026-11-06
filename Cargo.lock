@@ -1014,6 +1014,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "ferrisui-theme"
+version = "0.1.0"
+dependencies = [
+ "ferrisui-core",
+]
+
+[[package]]
 name = "ferrisui-widgets"
 version = "0.1.0"
 dependencies = [
