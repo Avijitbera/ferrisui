@@ -10,6 +10,7 @@ pub use ferrisui_core::view_node::{NodeKind, ViewNode};
 
 pub use ferrisui_layout::prelude::*;
 pub use ferrisui_platform::prelude::*;
+pub use ferrisui_theme::prelude::*;
 pub use ferrisui_widgets::prelude::*;
 
 pub use crate::app::App;
