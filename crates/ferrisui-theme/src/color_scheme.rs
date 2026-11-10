@@ -21,6 +21,9 @@ pub struct ColorScheme {
     pub surface_variant: Color,
     pub on_surface_variant: Color,
 
+    pub background: Color,
+    pub on_background: Color,
+
     pub error: Color,
     pub on_error: Color,
     pub success: Color,

@@ -4,7 +4,7 @@ use crate::tokens::{ElevationScale, ShapeScale, SpacingScale};
 use crate::typography::TypeScale;
 use ferrisui_core::color::Color;
 
-pub fn dark_color_schema() -> ColorScheme {
+pub fn dark_color_scheme() -> ColorScheme {
     ColorScheme {
         primary: Color::hex(0x667EEA), // Soft Indigo
         on_primary: Color::hex(0xFFFFFF),
@@ -35,7 +35,7 @@ pub fn dark_color_schema() -> ColorScheme {
 }
 
 pub fn default_dark_theme() -> ThemeData {
-    let colors = dark_color_schema();
+    let colors = dark_color_scheme();
     let typography = TypeScale::generate(colors.on_background);
     ThemeData {
         is_dark: true,

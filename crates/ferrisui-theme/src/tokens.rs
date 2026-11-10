@@ -37,6 +37,21 @@ pub struct SpacingScale {
     pub xxl: f32,
 }
 
+impl Default for SpacingScale {
+    fn default() -> Self {
+        Self {
+            none: 0.0,
+            xxs: 2.0,
+            xs: 4.0,
+            sm: 8.0,
+            md: 16.0,
+            lg: 24.0,
+            xl: 32.0,
+            xxl: 48.0,
+        }
+    }
+}
+
 impl SpacingScale {
     pub fn inset_all(&self, val: f32) -> EdgeInsets {
         EdgeInsets::all(val)

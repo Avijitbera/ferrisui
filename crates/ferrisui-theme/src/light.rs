@@ -4,7 +4,7 @@ use crate::tokens::{ElevationScale, ShapeScale, SpacingScale};
 use crate::typography::TypeScale;
 use ferrisui_core::color::Color;
 
-pub fn light_color_schema() -> ColorScheme {
+pub fn light_color_scheme() -> ColorScheme {
     ColorScheme {
         primary: Color::hex(0x4F46E5),
         on_primary: Color::hex(0xFFFFFF),
