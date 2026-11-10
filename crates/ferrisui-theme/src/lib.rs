@@ -1,6 +1,7 @@
 pub mod color_scheme;
 pub mod custom;
 pub mod dark;
+pub mod icon_theme;
 pub mod light;
 pub mod theme;
 pub mod tokens;

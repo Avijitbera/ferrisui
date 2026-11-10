@@ -955,6 +955,7 @@ dependencies = [
  "ferrisui-layout",
  "ferrisui-platform",
  "ferrisui-render",
+ "ferrisui-theme",
  "ferrisui-widgets",
  "log",
  "pollster",

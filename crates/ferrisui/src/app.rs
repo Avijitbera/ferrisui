@@ -8,21 +8,30 @@ use ferrisui_core::{
 };
 use ferrisui_platform::{event_loop::PlatformApp, window::WindowConfig};
 use ferrisui_render::{GpuContext, Renderer};
+use ferrisui_theme::ThemeData;
 use std::sync::Arc;
 
 pub struct App<V: View + 'static> {
     root_view: V,
     config: WindowConfig,
-    clear_color: Color,
+    clear_color: Option<Color>,
+    theme: ThemeData,
 }
 
 impl<V: View + 'static> App<V> {
     pub fn new(root_view: V) -> Self {
+        let theme = ThemeData::dark();
         Self {
             root_view,
             config: WindowConfig::default(),
-            clear_color: Color::hex(0x0F172A),
+            clear_color: None,
+            theme,
         }
+    }
+
+    pub fn theme(mut self, theme: ThemeData) -> Self {
+        self.theme = theme;
+        self
     }
 
     pub fn title(mut self, title: impl Into<String>) -> Self {
@@ -36,7 +45,7 @@ impl<V: View + 'static> App<V> {
     }
 
     pub fn clear_color(mut self, color: Color) -> Self {
-        self.clear_color = color;
+        self.clear_color = Some(color);
         self
     }
 
@@ -53,11 +62,14 @@ impl<V: View + 'static> App<V> {
         renderer.resize_logical(logical.width, logical.height);
 
         let mut build_ctx = BuildContext::new();
+        build_ctx.provide(self.theme.clone());
+
         let mut cursor_pos = Point::new(-1000.0, -1000.0);
         let mut _is_mouse_down = false;
         let mut last_root_node: Option<ViewNode> = None;
         let root_view = self.root_view;
-        let clear_color = self.clear_color;
+
+        let frame_clear_color = self.clear_color.unwrap_or(self.theme.colors.background);
 
         app.run(move |win, event, _should_exit| match event {
             Event::Mouse(MouseEvent::Moved { position }) => {
@@ -111,7 +123,7 @@ impl<V: View + 'static> App<V> {
                 last_root_node = Some(root_node);
 
                 // 5. Submit GPU frame
-                let _ = renderer.render_frame(clear_color);
+                let _ = renderer.render_frame(frame_clear_color);
             }
             _ => {}
         })?;

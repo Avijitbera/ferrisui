@@ -1,5 +1,6 @@
 use crate::color_scheme::ColorScheme;
 use crate::dark::dark_color_scheme;
+use crate::icon_theme::IconTheme;
 use crate::theme::ThemeData;
 use crate::tokens::{ElevationScale, ShapeScale, SpacingScale};
 use crate::typography::TypeScale;
@@ -11,6 +12,7 @@ pub struct ThemeBuilder {
     spacing: SpacingScale,
     shape: ShapeScale,
     elevation: ElevationScale,
+    icons: Option<IconTheme>,
 }
 
 impl ThemeBuilder {
@@ -21,6 +23,7 @@ impl ThemeBuilder {
             spacing: SpacingScale::default(),
             shape: ShapeScale::default(),
             elevation: ElevationScale::default(),
+            icons: None,
         }
     }
 
@@ -60,8 +63,21 @@ impl ThemeBuilder {
         self.spacing = spacing;
         self
     }
+
+    pub fn icons(mut self, icons: IconTheme) -> Self {
+        self.icons = Some(icons);
+        self
+    }
+
     pub fn build(self) -> ThemeData {
         let typography = TypeScale::generate(self.colors.on_background);
+        let icons = self.icons.unwrap_or_else(|| {
+            if self.is_dark {
+                IconTheme::dark(self.colors.on_background)
+            } else {
+                IconTheme::light(self.colors.on_background)
+            }
+        });
         ThemeData {
             is_dark: self.is_dark,
             colors: self.colors,
@@ -69,6 +85,7 @@ impl ThemeBuilder {
             spacing: self.spacing,
             shape: self.shape,
             elevation: self.elevation,
+            icons,
         }
     }
 }

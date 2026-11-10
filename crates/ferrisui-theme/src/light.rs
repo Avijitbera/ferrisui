@@ -1,4 +1,5 @@
 use crate::color_scheme::ColorScheme;
+use crate::icon_theme::IconTheme;
 use crate::theme::ThemeData;
 use crate::tokens::{ElevationScale, ShapeScale, SpacingScale};
 use crate::typography::TypeScale;
@@ -36,6 +37,7 @@ pub fn light_color_scheme() -> ColorScheme {
 pub fn default_light_theme() -> ThemeData {
     let colors = light_color_scheme();
     let typography = TypeScale::generate(colors.on_background);
+    let icons = IconTheme::light(colors.on_background);
     ThemeData {
         is_dark: false,
         colors,
@@ -43,5 +45,6 @@ pub fn default_light_theme() -> ThemeData {
         spacing: SpacingScale::default(),
         shape: ShapeScale::default(),
         elevation: ElevationScale::default(),
+        icons,
     }
 }

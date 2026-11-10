@@ -1,9 +1,12 @@
 use crate::color_scheme::ColorScheme;
 use crate::custom::ThemeBuilder;
 use crate::dark::default_dark_theme;
+use crate::icon_theme::IconTheme;
 use crate::light::default_light_theme;
 use crate::tokens::{ElevationScale, ShapeScale, SpacingScale};
 use crate::typography::TypeScale;
+use ferrisui_core::build_context::BuildContext;
+use std::sync::LazyLock;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct ThemeData {
@@ -13,6 +16,7 @@ pub struct ThemeData {
     pub spacing: SpacingScale,
     pub shape: ShapeScale,
     pub elevation: ElevationScale,
+    pub icons: IconTheme,
 }
 
 impl ThemeData {
@@ -35,8 +39,7 @@ impl Default for ThemeData {
     }
 }
 
-static DEFAULT_DARK_THEME: std::sync::LazyLock<ThemeData> =
-    std::sync::LazyLock::new(ThemeData::dark);
+static DEFAULT_DARK_THEME: LazyLock<ThemeData> = LazyLock::new(ThemeData::dark);
 
 /// Extension trait enabling ergonomic `.theme()` and `.set_theme()` on `BuildContext`.
 pub trait ThemeContextExt {
@@ -47,7 +50,7 @@ pub trait ThemeContextExt {
     fn set_theme(&mut self, theme: ThemeData);
 }
 
-impl ThemeContextExt for ferrisui_core::build_context::BuildContext {
+impl ThemeContextExt for BuildContext {
     fn theme(&self) -> &ThemeData {
         self.get::<ThemeData>()
             .unwrap_or_else(|| &DEFAULT_DARK_THEME)
