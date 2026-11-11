@@ -6,6 +6,7 @@ pub struct Text {
     content: String,
     font_size: f32,
     color: Color,
+    align_left: bool,
 }
 
 impl Text {
@@ -14,6 +15,7 @@ impl Text {
             content: content.into(),
             font_size: 16.0,
             color: Color::rgba(1.0, 1.0, 1.0, 0.95),
+            align_left: false,
         }
     }
 
@@ -26,6 +28,11 @@ impl Text {
         self.color = color;
         self
     }
+
+    pub fn align_left(mut self) -> Self {
+        self.align_left = true;
+        self
+    }
 }
 
 impl View for Text {
@@ -35,5 +42,6 @@ impl View for Text {
             font_size: self.font_size,
             color: self.color,
         })
+        .with_text_left_aligned(self.align_left)
     }
 }

@@ -44,13 +44,27 @@ impl View for Checkbox {
             Color::rgba(1.0, 1.0, 1.0, 0.08)
         };
 
-        let check_box = ViewNode::new(NodeKind::Container {
+        let mut check_box = ViewNode::new(NodeKind::Container {
             background: box_bg,
             corner_radius: 6.0,
-            padding: EdgeInsets::all(3.0),
+            padding: EdgeInsets::symmetric(8.0, 4.0),
         });
 
-        if let Some(ref text) = self.label {
+        if self.checked {
+            check_box = check_box.with_child(ViewNode::new(NodeKind::Text {
+                text: "v".to_string(),
+                font_size: 11.0,
+                color: Color::WHITE,
+            }));
+        } else {
+            check_box = check_box.with_child(ViewNode::new(NodeKind::Text {
+                text: " ".to_string(),
+                font_size: 11.0,
+                color: Color::rgba(0.0, 0.0, 0.0, 0.0),
+            }));
+        }
+
+        let mut node = if let Some(ref text) = self.label {
             ViewNode::new(NodeKind::Flex {
                 is_vertical: false,
                 spacing: 10.0,
@@ -59,10 +73,24 @@ impl View for Checkbox {
             .with_child(ViewNode::new(NodeKind::Text {
                 text: text.clone(),
                 font_size: 15.0,
-                color: Color::WHITE,
+                color: if self.checked {
+                    Color::rgba(1.0, 1.0, 1.0, 0.5)
+                } else {
+                    Color::WHITE
+                },
             }))
         } else {
             check_box
+        };
+
+        if let Some(ref cb) = self.on_change {
+            let cb = cb.clone();
+            let next_val = !self.checked;
+            node.on_click = Some(Callback::new(move |_| {
+                cb.emit(next_val);
+            }));
         }
+
+        node
     }
 }

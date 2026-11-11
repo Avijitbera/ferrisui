@@ -40,14 +40,40 @@ pub enum MouseEvent {
     Left,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum Key {
+    Enter,
+    Backspace,
+    Tab,
+    Escape,
+    Space,
+    ArrowUp,
+    ArrowDown,
+    ArrowLeft,
+    ArrowRight,
+    Delete,
+    Character(String),
+    Other,
+}
+
 #[derive(Debug, Clone, PartialEq)]
 pub enum KeyEvent {
     Key {
+        key: Key,
         key_code: u32,
         state: ElementState,
         modifiers: Modifiers,
     },
     Character(char),
+}
+
+impl KeyEvent {
+    pub fn is_pressed(&self) -> bool {
+        match self {
+            KeyEvent::Key { state, .. } => *state == ElementState::Pressed,
+            KeyEvent::Character(_) => true,
+        }
+    }
 }
 
 #[derive(Debug, Clone, PartialEq)]

@@ -20,3 +20,7 @@ path = "../../examples/hello_world.rs"
 [[example]]
 name = "counter"
 path = "../../examples/counter.rs"
+
+[[example]]
+name = "todo_app"
+path = "../../examples/todo_app.rs"

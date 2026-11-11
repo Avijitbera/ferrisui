@@ -85,3 +85,41 @@ impl View for HStack {
         node
     }
 }
+
+pub struct ZStack {
+    children: Vec<AnyView>,
+}
+
+impl ZStack {
+    pub fn new() -> Self {
+        Self {
+            children: Vec::new(),
+        }
+    }
+
+    pub fn child<V: View + 'static>(mut self, child: V) -> Self {
+        self.children.push(AnyView::new(child));
+        self
+    }
+
+    pub fn children(mut self, children: impl IntoIterator<Item = AnyView>) -> Self {
+        self.children.extend(children);
+        self
+    }
+}
+
+impl Default for ZStack {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl View for ZStack {
+    fn build(&self, ctx: &mut BuildContext) -> ViewNode {
+        let mut node = ViewNode::new(NodeKind::ZStack);
+        for child in &self.children {
+            node = node.with_child(child.build(ctx));
+        }
+        node
+    }
+}

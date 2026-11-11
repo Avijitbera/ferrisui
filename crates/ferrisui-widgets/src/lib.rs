@@ -30,7 +30,7 @@ pub use radio::Radio;
 pub use scroll_view::ScrollView;
 pub use slider::Slider;
 pub use spacer::Spacer;
-pub use stack::{HStack, VStack};
+pub use stack::{HStack, VStack, ZStack};
 pub use text::Text;
 pub use text_input::{TextInput, TextInputStyle};
 pub use time_picker::{Time, TimePicker};
@@ -50,7 +50,7 @@ pub mod prelude {
     pub use crate::scroll_view::ScrollView;
     pub use crate::slider::Slider;
     pub use crate::spacer::Spacer;
-    pub use crate::stack::{HStack, VStack};
+    pub use crate::stack::{HStack, VStack, ZStack};
     pub use crate::text::Text;
     pub use crate::text_input::{TextInput, TextInputStyle};
     pub use crate::time_picker::{Time, TimePicker};

@@ -1,11 +1,14 @@
 use crate::window::{Window, WindowConfig};
-use ferrisui_core::event::{ElementState, Event, KeyEvent, Modifiers, MouseButton, MouseEvent};
+use ferrisui_core::event::{
+    ElementState, Event, Key, KeyEvent, Modifiers, MouseButton, MouseEvent,
+};
 use ferrisui_core::geometry::Point;
 use winit::event::{
     ElementState as WinitElementState, Event as WinitEvent, MouseButton as WinitMouseButton,
     WindowEvent as WinitWindowEvent,
 };
 use winit::event_loop::{ControlFlow, EventLoop};
+use winit::keyboard::{Key as WinitKey, NamedKey};
 
 pub struct PlatformApp {
     event_loop: Option<EventLoop<()>>,
@@ -129,9 +132,25 @@ impl PlatformApp {
                             WinitElementState::Released => ElementState::Released,
                         };
 
+                        let key = match &key_event.logical_key {
+                            WinitKey::Named(NamedKey::Enter) => Key::Enter,
+                            WinitKey::Named(NamedKey::Backspace) => Key::Backspace,
+                            WinitKey::Named(NamedKey::Tab) => Key::Tab,
+                            WinitKey::Named(NamedKey::Escape) => Key::Escape,
+                            WinitKey::Named(NamedKey::Space) => Key::Space,
+                            WinitKey::Named(NamedKey::ArrowUp) => Key::ArrowUp,
+                            WinitKey::Named(NamedKey::ArrowDown) => Key::ArrowDown,
+                            WinitKey::Named(NamedKey::ArrowLeft) => Key::ArrowLeft,
+                            WinitKey::Named(NamedKey::ArrowRight) => Key::ArrowRight,
+                            WinitKey::Named(NamedKey::Delete) => Key::Delete,
+                            WinitKey::Character(s) => Key::Character(s.to_string()),
+                            _ => Key::Other,
+                        };
+
                         handler(
                             &window,
                             Event::Key(KeyEvent::Key {
+                                key,
                                 key_code: 0,
                                 state: st,
                                 modifiers,
