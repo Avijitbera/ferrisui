@@ -5,6 +5,7 @@ pub mod date_picker;
 pub mod divider;
 pub mod dropdown;
 pub mod form;
+pub mod grid;
 pub mod ink_well;
 pub mod progress;
 pub mod radio;

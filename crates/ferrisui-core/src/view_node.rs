@@ -22,6 +22,11 @@ pub enum NodeKind {
         spacing: f32,
     },
     ZStack,
+    Grid {
+        columns: usize,
+        spacing: f32,
+        row_spacing: f32,
+    },
 }
 
 #[derive(Debug, Clone)]
