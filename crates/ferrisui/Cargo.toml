@@ -24,3 +24,7 @@ path = "../../examples/counter.rs"
 [[example]]
 name = "todo_app"
 path = "../../examples/todo_app.rs"
+
+[[example]]
+name = "calculator"
+path = "../../examples/calculator.rs"

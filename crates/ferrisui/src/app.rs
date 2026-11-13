@@ -93,7 +93,8 @@ impl<V: View + 'static> App<V> {
                                 cursor_pos
                             };
                             let mut clicked_focusable_id: Option<ViewId> = None;
-                            let handled = dispatch_click(root, click_target, &mut clicked_focusable_id);
+                            let handled =
+                                dispatch_click(root, click_target, &mut clicked_focusable_id);
 
                             if let Some(target_id) = clicked_focusable_id {
                                 notify_blur_except(root, target_id);
@@ -331,6 +332,24 @@ fn compute_preferred_size(node: &ViewNode) -> Size {
             }
             Size::new(max_w, max_h)
         }
+        NodeKind::Grid {
+            columns,
+            spacing,
+            row_spacing,
+        } => {
+            let count = node.children.len();
+            if count == 0 {
+                return Size::ZERO;
+            }
+            let cols = *columns.max(&1);
+            let rows = (count + cols - 1) / cols;
+            let child_sizes: Vec<Size> = node.children.iter().map(compute_preferred_size).collect();
+            let max_cell_w = child_sizes.iter().map(|s| s.width).fold(0.0f32, f32::max);
+            let max_cell_h = child_sizes.iter().map(|s| s.height).fold(0.0f32, f32::max);
+            let total_w = max_cell_w * cols as f32 + *spacing * (cols - 1) as f32;
+            let total_h = max_cell_h * rows as f32 + *row_spacing * (rows.saturating_sub(1)) as f32;
+            Size::new(total_w, total_h)
+        }
         _ => Size::new(80.0, 36.0),
     }
 }
@@ -445,6 +464,33 @@ fn layout_node_recursive(node: &mut ViewNode, bounds: Rect) {
                     layout_node_recursive(child, Rect::new(current_x, y, w, h));
                     current_x += w + *spacing;
                 }
+            }
+        }
+        NodeKind::Grid {
+            columns,
+            spacing,
+            row_spacing,
+        } => {
+            let count = node.children.len();
+            if count == 0 {
+                return;
+            }
+            let cols = *columns.max(&1);
+            let total_h_spacing = *spacing * (cols - 1) as f32;
+            let col_w = ((bounds.size.width - total_h_spacing) / cols as f32).max(1.0);
+            for (i, child) in node.children.iter_mut().enumerate() {
+                let col = i % cols;
+                let row = i / cols;
+                let pref = compute_preferred_size(child);
+                // Default to square cell aspect ratio if preferred height is small
+                let cell_h = if pref.height > 10.0 {
+                    pref.height
+                } else {
+                    col_w
+                };
+                let x = bounds.origin.x + col as f32 * (col_w + *spacing);
+                let y = bounds.origin.y + row as f32 * (cell_h + *row_spacing);
+                layout_node_recursive(child, Rect::new(x, y, col_w, cell_h));
             }
         }
         _ => {

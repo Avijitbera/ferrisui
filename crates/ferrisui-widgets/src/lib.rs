@@ -37,6 +37,8 @@ pub use text_input::{TextInput, TextInputStyle};
 pub use time_picker::{Time, TimePicker};
 pub use toggle::Toggle;
 
+pub use grid::Grid;
+
 pub mod prelude {
     pub use crate::button::{Button, ButtonStyle, ButtonVariant};
     pub use crate::checkbox::Checkbox;
@@ -45,6 +47,7 @@ pub mod prelude {
     pub use crate::divider::Divider;
     pub use crate::dropdown::{Dropdown, DropdownItem};
     pub use crate::form::{Form, FormField, FormSection, Validator, validators};
+    pub use crate::grid::Grid;
     pub use crate::ink_well::{InkWell, RippleState};
     pub use crate::progress::Progress;
     pub use crate::radio::Radio;
